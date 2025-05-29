@@ -47,7 +47,7 @@ export default function Navigation() {
   return (
     <nav
       className={cn(
-        "glass-nav px-6 py-3 rounded-full transition-all duration-300",
+        "glass-nav px-6 py-3 rounded-full transition-all duration-300 hidden md:flex",
         isScrolled ? "top-4 backdrop-blur-xl" : "top-8 backdrop-blur-lg"
       )}
     >

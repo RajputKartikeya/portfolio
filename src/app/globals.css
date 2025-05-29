@@ -34,6 +34,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -42,32 +43,66 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
   line-height: 1.6;
+  width: 100%;
+  max-width: 100vw;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* Hide scrollbars on mobile devices */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
+  }
+
+  /* Prevent any element from causing horizontal overflow */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  /* Ensure mobile navigation doesn't cause overflow */
+  .mobile-nav-container {
+    contain: layout;
+    max-width: 100vw;
+    overflow: hidden;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-}
+/* Custom Scrollbar - Only for desktop */
+@media (min-width: 769px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    var(--primary-blue),
-    var(--primary-purple)
-  );
-  border-radius: 10px;
-}
+  ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    180deg,
-    var(--primary-purple),
-    var(--primary-cyan)
-  );
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      var(--primary-blue),
+      var(--primary-purple)
+    );
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      180deg,
+      var(--primary-purple),
+      var(--primary-cyan)
+    );
+  }
 }
 
 /* Glassmorphism Utilities */
@@ -185,7 +220,7 @@ h6 {
 .hero-text {
   font-size: clamp(3rem, 8vw, 8rem);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 1.2;
 }
 
 .section-heading {

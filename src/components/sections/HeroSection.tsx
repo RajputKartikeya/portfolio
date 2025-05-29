@@ -47,21 +47,24 @@ export default function HeroSection() {
             </span>
           </div>
 
-          {/* Name */}
-          <h1
-            className="hero-text gradient-text mb-6 animate-fade-in-up"
-            style={{ animationDelay: "0.2s" }}
-          >
-            {personalInfo.name}
-          </h1>
-
-          {/* Title */}
-          <h2
-            className="text-2xl md:text-4xl font-bold text-text-primary mb-6 animate-fade-in-up"
-            style={{ animationDelay: "0.4s" }}
-          >
-            {personalInfo.title}
-          </h2>
+          <div>
+            {/* Name */}
+            <h1
+              className="hero-text gradient-text mb-6 animate-fade-in-up"
+              style={{ animationDelay: "0.2s" }}
+            >
+              {personalInfo.name}
+            </h1>
+          </div>
+          <div>
+            {/* Title */}
+            <h2
+              className="text-2xl md:text-4xl font-bold text-text-primary  animate-fade-in-up"
+              style={{ animationDelay: "0.4s" }}
+            >
+              {personalInfo.title}
+            </h2>
+          </div>
 
           {/* Animated Tagline */}
           <div
