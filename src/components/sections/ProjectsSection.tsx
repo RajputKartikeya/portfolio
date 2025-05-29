@@ -1,11 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { projects } from "@/lib/data";
 import { ExternalLink, Github, Eye, Code } from "lucide-react";
 
 export default function ProjectsSection() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+
+  const handleImageError = (projectId: number) => {
+    setImageErrors((prev) => ({ ...prev, [projectId]: true }));
+  };
 
   return (
     <section className="py-20 relative">
@@ -30,43 +36,26 @@ export default function ProjectsSection() {
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              {/* Project Image/Placeholder */}
-              <div className="relative h-48 bg-gradient-to-br from-primary-blue/20 to-primary-purple/20 overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Code className="w-16 h-16 text-primary-blue opacity-50" />
-                </div>
-
-                {/* Overlay on Hover */}
-                <div
-                  className={`absolute inset-0 bg-black/50 flex items-center justify-center space-x-4 transition-opacity duration-300 ${
-                    hoveredProject === project.id ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="glass-button p-3 rounded-full hover:scale-110 transition-all duration-300"
-                    >
-                      <Github className="w-5 h-5" />
-                    </a>
-                  )}
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="glass-button p-3 rounded-full hover:scale-110 transition-all duration-300"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
-                  )}
-                </div>
+              {/* Project Image */}
+              <div className="relative aspect-[5/3] bg-gradient-to-br from-primary-blue/20 to-primary-purple/20 overflow-hidden">
+                {project.image && !imageErrors[project.id] ? (
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} project screenshot`}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    onError={() => handleImageError(project.id)}
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Code className="w-16 h-16 text-primary-blue opacity-50" />
+                  </div>
+                )}
 
                 {/* Featured Badge */}
                 {project.featured && (
-                  <div className="absolute top-4 left-4">
+                  <div className="absolute top-4 left-4 z-20">
                     <span className="bg-gradient-to-r from-primary-blue to-primary-purple text-white px-3 py-1 rounded-full text-xs font-medium">
                       Featured
                     </span>
@@ -98,7 +87,7 @@ export default function ProjectsSection() {
                 </div>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
@@ -109,8 +98,8 @@ export default function ProjectsSection() {
                   ))}
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex space-x-3">
+                {/* Action Buttons - Moved from overlay to bottom */}
+                <div className="flex flex-wrap gap-3">
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}
@@ -119,7 +108,7 @@ export default function ProjectsSection() {
                       className="flex items-center px-4 py-2 glass-button rounded-lg text-sm font-medium hover:scale-105 transition-all duration-300"
                     >
                       <Github className="w-4 h-4 mr-2" />
-                      Code
+                      View Code
                     </a>
                   )}
                   {project.liveUrl && (
@@ -129,7 +118,7 @@ export default function ProjectsSection() {
                       rel="noopener noreferrer"
                       className="flex items-center px-4 py-2 bg-gradient-to-r from-primary-blue to-primary-purple text-white rounded-lg text-sm font-medium hover:scale-105 transition-all duration-300"
                     >
-                      <Eye className="w-4 h-4 mr-2" />
+                      <ExternalLink className="w-4 h-4 mr-2" />
                       Live Demo
                     </a>
                   )}
@@ -142,7 +131,7 @@ export default function ProjectsSection() {
         {/* View All Projects Button */}
         <div className="text-center mt-12">
           <a
-            href="https://github.com/Kartikeyarajput7"
+            href="https://github.com/RajputKartikeya"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-8 py-4 glass-button rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300"

@@ -33,19 +33,49 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate form data
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Create mailto link with form data
+    const subject = encodeURIComponent(formData.subject);
+    const body = encodeURIComponent(
+      `Hi Kartikeya,
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+My name is ${formData.name} and I'm reaching out regarding: ${formData.subject}
 
-    // Reset form after success
+${formData.message}
+
+Best regards,
+${formData.name}
+Email: ${formData.email}`
+    );
+
+    const mailtoLink = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
+
+    // Open email client
+    window.location.href = mailtoLink;
+
+    // Show success state briefly
     setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
+      // Reset form after showing success
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      }, 2000);
+    }, 500);
   };
 
   const contactMethods = [
@@ -56,13 +86,7 @@ export default function ContactSection() {
       href: `mailto:${personalInfo.email}`,
       color: "text-primary-blue",
     },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: personalInfo.phone,
-      href: `tel:${personalInfo.phone}`,
-      color: "text-primary-purple",
-    },
+
     {
       icon: MapPin,
       label: "Location",
@@ -269,34 +293,36 @@ export default function ContactSection() {
                 </div>
 
                 {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting || isSubmitted}
-                  className={`w-full py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center ${
-                    isSubmitted
-                      ? "bg-green-500 text-white"
-                      : isSubmitting
-                      ? "bg-primary-blue/50 text-white cursor-not-allowed"
-                      : "bg-gradient-to-r from-primary-blue to-primary-purple text-white hover:scale-105 hover:shadow-lg"
-                  }`}
-                >
-                  {isSubmitted ? (
-                    <>
-                      <CheckCircle className="w-5 h-5 mr-2" />
-                      Message Sent!
-                    </>
-                  ) : isSubmitting ? (
-                    <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5 mr-2" />
-                      Send Message
-                    </>
-                  )}
-                </button>
+                <div className="pt-10">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || isSubmitted}
+                    className={`w-full py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center ${
+                      isSubmitted
+                        ? "bg-green-500 text-white"
+                        : isSubmitting
+                        ? "bg-primary-blue/50 text-white cursor-not-allowed"
+                        : "bg-gradient-to-r from-primary-blue to-primary-purple text-white hover:scale-105 hover:shadow-lg"
+                    }`}
+                  >
+                    {isSubmitted ? (
+                      <>
+                        <CheckCircle className="w-5 h-5 mr-2" />
+                        Message Sent!
+                      </>
+                    ) : isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </div>
               </form>
             </div>
           </div>

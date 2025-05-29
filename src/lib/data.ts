@@ -8,7 +8,7 @@ export const personalInfo = {
   phone: "+91 9821557639",
   location: "New Delhi, India",
   linkedin: "https://www.linkedin.com/in/kartikeyarajput7",
-  github: "https://github.com/Kartikeyarajput7",
+  github: "https://github.com/RajputKartikeya",
 };
 
 export const experience = [
@@ -23,7 +23,7 @@ export const experience = [
       "Configured and tested failover mechanisms within operational and backup control centers, ensuring seamless transition during simulated outages and minimizing data loss by 99% through robust data replication strategies",
     ],
     technologies: ["SCADA", "RTU Configuration", "Metro Rail Systems"],
-    current: true,
+    current: false,
   },
   {
     id: 2,
@@ -119,31 +119,40 @@ export const skills = {
     { name: "Java", level: 90, category: "backend" },
     { name: "JavaScript", level: 95, category: "frontend" },
     { name: "TypeScript", level: 85, category: "frontend" },
-    { name: "HTML/CSS", level: 95, category: "frontend" },
+    { name: "Python", level: 75, category: "backend" },
+    { name: "Dart", level: 80, category: "mobile" },
+    { name: "HTML", level: 95, category: "frontend" },
+    { name: "CSS", level: 95, category: "frontend" },
   ],
   frontend: [
     { name: "React.js", level: 90, category: "frontend" },
     { name: "Next.js", level: 85, category: "frontend" },
     { name: "Tailwind CSS", level: 90, category: "frontend" },
+    { name: "Vite.js", level: 80, category: "frontend" },
     { name: "Flutter", level: 80, category: "mobile" },
   ],
   backend: [
     { name: "Spring Boot", level: 85, category: "backend" },
+    { name: "Spring Framework", level: 85, category: "backend" },
+    { name: "Spring Security", level: 80, category: "backend" },
     { name: "Node.js", level: 80, category: "backend" },
     { name: "RESTful APIs", level: 85, category: "backend" },
     { name: "Microservices", level: 75, category: "backend" },
+    { name: "JPA/Hibernate", level: 80, category: "backend" },
+    { name: "Maven/Gradle", level: 75, category: "tools" },
   ],
   database: [
     { name: "MongoDB", level: 80, category: "database" },
     { name: "MySQL", level: 85, category: "database" },
     { name: "Firebase", level: 80, category: "database" },
-    { name: "H2 Database", level: 70, category: "database" },
   ],
   tools: [
     { name: "Git", level: 90, category: "tools" },
     { name: "Jira", level: 85, category: "tools" },
     { name: "Kubernetes", level: 70, category: "tools" },
     { name: "Bitbucket", level: 80, category: "tools" },
+    { name: "Docker", level: 75, category: "tools" },
+    { name: "AWS", level: 70, category: "cloud" },
   ],
 };
 
@@ -160,8 +169,8 @@ export const education = [
   {
     id: 2,
     institution: "Basava International School",
-    degree: "XII th Standard",
-    duration: "2021",
+    degree: "High School (XIIth CBSE)",
+    duration: "2020-2021",
     location: "Delhi, India",
     percentage: "81.5%",
     current: false,

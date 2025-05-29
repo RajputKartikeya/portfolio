@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { skills } from "@/lib/data";
 import { Code, Database, Wrench, Smartphone, Globe } from "lucide-react";
 import TechIcon from "@/components/ui/TechIcon";
 
 export default function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("frontend");
 
   const categories = [
-    { id: "all", name: "All Skills", icon: Globe },
     { id: "frontend", name: "Frontend", icon: Code },
     { id: "backend", name: "Backend", icon: Database },
     { id: "mobile", name: "Mobile", icon: Smartphone },
     { id: "tools", name: "Tools", icon: Wrench },
+    { id: "cloud", name: "Cloud", icon: Database },
   ];
 
   const getAllSkills = () => {
@@ -27,22 +27,25 @@ export default function SkillsSection() {
   };
 
   const getFilteredSkills = () => {
-    if (activeCategory === "all") {
-      return getAllSkills();
-    }
-
     const categoryMap = {
       frontend: [
-        ...skills.frontend,
+        ...skills.frontend.filter((s) => s.category === "frontend"),
         ...skills.languages.filter((s) => s.category === "frontend"),
       ],
       backend: [
-        ...skills.backend,
+        ...skills.backend.filter((s) => s.category === "backend"),
         ...skills.languages.filter((s) => s.category === "backend"),
       ],
-      mobile: skills.frontend.filter((s) => s.name === "Flutter"),
-      tools: skills.tools,
+      mobile: [
+        ...skills.frontend.filter((s) => s.category === "mobile"),
+        ...skills.languages.filter((s) => s.category === "mobile"),
+      ],
+      tools: [
+        ...skills.tools.filter((s) => s.category === "tools"),
+        ...skills.backend.filter((s) => s.category === "tools"),
+      ],
       database: skills.database,
+      cloud: skills.tools.filter((s) => s.category === "cloud"),
     };
 
     return categoryMap[activeCategory as keyof typeof categoryMap] || [];
@@ -115,8 +118,8 @@ export default function SkillsSection() {
           ))}
         </div>
 
-        {/* Skills Grid - Detailed View with Progress Bars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+        {/* Skills Grid - Detailed View with Progress Bars - Hidden on Mobile */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
           {getFilteredSkills().map((skill, index) => (
             <div
               key={`${skill.name}-${index}`}
@@ -126,6 +129,43 @@ export default function SkillsSection() {
               <SkillCard skill={skill} />
             </div>
           ))}
+        </div>
+
+        {/* Mobile Skills Display - Polished Glass Container */}
+        <div className="md:hidden mb-16">
+          <div className="glass-card p-8 rounded-2xl shadow-2xl animate-fade-in">
+            <div className="text-center mb-6">
+              <h3 className="text-xl font-bold gradient-text mb-2">
+                {categories.find((cat) => cat.id === activeCategory)?.name}{" "}
+                Technologies
+              </h3>
+              <div className="h-px bg-gradient-to-r from-transparent via-glass-border to-transparent mb-6"></div>
+            </div>
+
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-6 justify-items-center">
+              {getFilteredSkills().map((skill, index) => (
+                <div
+                  key={`mobile-${skill.name}-${index}`}
+                  className="animate-fade-in transform hover:scale-110 transition-all duration-300"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <TechIcon skill={skill} />
+                </div>
+              ))}
+            </div>
+
+            {/* Subtle bottom accent */}
+            <div className="mt-6 text-center">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-glass-bg border border-glass-border">
+                <span className="text-xs text-text-muted">
+                  {getFilteredSkills().length}{" "}
+                  {getFilteredSkills().length === 1
+                    ? "Technology"
+                    : "Technologies"}
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Tech Stack Showcase - Icon-Only Infinite Carousel */}

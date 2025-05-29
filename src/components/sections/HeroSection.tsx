@@ -127,29 +127,22 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-text-secondary rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-text-secondary rounded-full mt-2 animate-pulse"></div>
-          </div>
+        {/* Floating 3D Elements - Placeholder for now */}
+        <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2">
+          <div className="w-20 h-20 border border-primary-blue rounded-lg animate-float opacity-30 rotate-45"></div>
         </div>
-      </div>
-
-      {/* Floating 3D Elements - Placeholder for now */}
-      <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2">
-        <div className="w-20 h-20 border border-primary-blue rounded-lg animate-float opacity-30 rotate-45"></div>
-      </div>
-      <div className="absolute top-1/3 right-1/4 transform -translate-y-1/2">
-        <div
-          className="w-16 h-16 border border-primary-purple rounded-full animate-float opacity-20"
-          style={{ animationDelay: "1s" }}
-        ></div>
-      </div>
-      <div className="absolute bottom-1/3 left-1/3 transform -translate-y-1/2">
-        <div
-          className="w-12 h-12 border border-primary-cyan rounded-lg animate-float opacity-25"
-          style={{ animationDelay: "2s" }}
-        ></div>
+        <div className="absolute top-1/3 right-1/4 transform -translate-y-1/2">
+          <div
+            className="w-16 h-16 border border-primary-purple rounded-full animate-float opacity-20"
+            style={{ animationDelay: "1s" }}
+          ></div>
+        </div>
+        <div className="absolute bottom-1/3 left-1/3 transform -translate-y-1/2">
+          <div
+            className="w-12 h-12 border border-primary-cyan rounded-lg animate-float opacity-25"
+            style={{ animationDelay: "2s" }}
+          ></div>
+        </div>
       </div>
     </section>
   );
