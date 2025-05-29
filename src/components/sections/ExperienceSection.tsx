@@ -157,7 +157,8 @@ export default function ExperienceSection() {
         {/* Download Resume Button */}
         <div className="text-center mt-12">
           <a
-            href="https://drive.google.com/file/d/1-w_fs6XPSaMY2dEqxBFtxBxGeW3-5R6W/view?usp=drive_link"
+            href="/resume.pdf"
+            download="Kartikeya_Rajput_Resume.pdf"
             className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-blue to-primary-purple text-white rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             <svg

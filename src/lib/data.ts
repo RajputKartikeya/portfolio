@@ -3,7 +3,7 @@ export const personalInfo = {
   title: "Software Engineer",
   tagline: "Building innovative solutions with modern technologies",
   description:
-    "Software Engineer with hands-on experience in full-stack development using React.js, Next.js, Spring Boot, and Flutter. Proficient in building scalable web applications with RESTful APIs, database integration (MongoDB, MySQL), and cloud services (Firebase). Experienced in modern development practices including TypeScript, authentication systems, and responsive UI design.",
+    "Welcome to my digital space! A Software Engineer from New Delhi on a mission to build technology that matters. My journey in full-stack development has taken me from metro rail automation systems at Siemens to innovative web solutions at Bharti Airtel, each experience shaping my approach to creating impactful software. I specialize in React.js, Next.js, Spring Boot, and Flutter, crafting everything from live streaming platforms to comprehensive task management systems and safety-focused mobile apps that cover 20+ Indian beaches. What drives me isn't just writing clean code – it's the excitement of seeing an idea come to life and make a real difference. When I'm not building the next great application, you'll find me mentoring fellow developers and contributing to Delhi's growing tech community. I believe the best solutions come from collaboration, continuous learning, and never losing sight of the human element behind every line of code.",
   email: "kartikeyarajput7@gmail.com",
   phone: "+91 9821557639",
   location: "New Delhi, India",
